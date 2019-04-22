@@ -125,6 +125,15 @@ This wouldn't work with the
 [PyPICloud](https://pypicloud.readthedocs.io/en/latest/) project. It is also
 built on my [Python base image](https://github.com/MinchinWeb/docker-python).
 
+Steven Arcangeli's [docker-ized version of
+PyPICloud](https://github.com/stevearc/pypicloud-docker) were used as an
+inspiration and a model for creating this image. (Steven is also the creator of
+PyPICloud.)
+
+The `/sbin/setuser` script is cribbed from [Phusion's base
+image](http://phusion.github.io/baseimage-docker/).
+
+
 ## Known Issues
 
 - you'll need to log in via the WebUI once the image is first up to create a
