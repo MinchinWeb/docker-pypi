@@ -80,8 +80,8 @@ determine where your [`pip.conf` file is on
 disk](https://pip.pypa.io/en/stable/user_guide/#configuration). To use your
 local server alone, add the following to your `pip.conf`:
 
-  [global]
-  index-url = http://localhost:6543/simple/
+    [global]
+    index-url = http://localhost:6543/simple/
 
 **Note**: Adjust the URL to match the hostname of the machine you're running
 Docker on, and the port to match what you set in the `docker-compose.yaml`
