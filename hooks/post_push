@@ -1,0 +1,25 @@
+#!/bin/bash
+# hooks/build
+# https://docs.docker.com/docker-cloud/builds/advanced/
+
+# For "Python 3.7.3", pushes with tags "3", "3.7", "3.7.3", and commit hash
+
+echo "[***] Post_Push hook running"
+
+# get PyPICloud version from image's environmental variables, without running it
+export PYPICLOUD_VERSION_X_Y_Z=$(docker inspect -f '{{range $index, $value := .Config.Env}}{{$value}} {{end}}' $IMAGE_NAME | grep -oP 'PYPICLOUD_VERSION=\K\d+(.\d+(.\d+\w*)?)?')
+export PYPICLOUD_VERSION_X_Y=$(echo $PYPICLOUD_VERSION_X_Y_Z | cut -f 1-2 -d .)
+export PYPICLOUD_VERSION_X=$(echo $PYPICLOUD_VERSION_X_Y_Z | cut -f 1 -d .)
+echo "     Versions: $PYPICLOUD_VERSION_X  $PYPICLOUD_VERSION_X_Y  $PYPICLOUD_VERSION_X_Y_Z  $SOURCE_COMMIT"
+
+docker tag $IMAGE_NAME $DOCKER_REPO:$PYPICLOUD_VERSION_X_Y_Z
+docker push $DOCKER_REPO:$PYPICLOUD_VERSION_X_Y_Z
+
+docker tag $IMAGE_NAME $DOCKER_REPO:$PYPICLOUD_VERSION_X_Y
+docker push $DOCKER_REPO:$PYPICLOUD_VERSION_X_Y
+
+docker tag $IMAGE_NAME $DOCKER_REPO:$PYPICLOUD_VERSION_X
+docker push $DOCKER_REPO:$PYPICLOUD_VERSION_X
+
+docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
+docker push $DOCKER_REPO:$SOURCE_COMMIT
