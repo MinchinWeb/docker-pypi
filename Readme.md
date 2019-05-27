@@ -100,8 +100,8 @@ To upload, you will need to update your `.pypirc` file (typically at
 
     [pypicloud]
     repository: http://localhost:6543/simple/
-    username: <<username>>
-    password: <<password>>
+    username: [username]
+    password: [password]
 
 Again, the URL will likely need to be adjusted. Usernames and passwords can be
 set on the Web UI.
@@ -141,3 +141,4 @@ image](http://phusion.github.io/baseimage-docker/).
 - by default, you need to have a user account (and then provider the username
   and password when you run `pip`); if you want, you can adjust the settings to
   allow anonymous downloads.
+- the favicon will return a 404 error
