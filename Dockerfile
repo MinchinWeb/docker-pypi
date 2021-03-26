@@ -1,7 +1,7 @@
 FROM minchinweb/python
 
 ARG DEBIAN_FRONTEND=noninteractive
-ENV PYPICLOUD_VERSION 1.0.11
+ENV PYPICLOUD_VERSION 1.2.0
 
 # Add an environment variable that pypicloud-uwsgi.sh uses to determine which
 # user to run as
@@ -24,14 +24,25 @@ VOLUME /config
 RUN \
     apt update -qq && \
     echo "\n**** Apt installs ****" && \
+    apt install --reinstall --no-install-recommends -y \
+            libc-bin \
+    && \
     apt install --no-install-recommends -y \
             gcc \
             libldap2-dev \
             libsasl2-dev \
             libmysqlclient-dev \
-            libffi-dev \
+            # libffi-dev \
             libssl-dev \
+            # bcrypt \
+            wget \
     && \
+    echo "\n**** Manuall Install of 'libffi' v6 ****" && \
+    # only version 7 is availabe on Ubuntu focal (20.04)
+    # for links --> https://packages.ubuntu.com/bionic/amd64/libffi6/download
+        wget http://mirrors.kernel.org/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb  && \
+        dpkg -i libffi6* && \
+        rm libffi6* && \
     echo "\n**** Installing Python packages ****" && \
     pip install \
         pypicloud[all_plugins]==$PYPICLOUD_VERSION \
@@ -40,10 +51,12 @@ RUN \
         pastescript \
         mysqlclient \
         psycopg2-binary \
+        # bcrypt \
     && \
     echo "\n**** Apt cleanup ****" && \
     apt remove -y \
             gcc \
+            wget \
     && \
     apt autoremove -y && \
     rm -rf /var/lib/apt/lists/*

@@ -51,14 +51,14 @@ provided.
 If you map `/config` (which is probably what you want), you'll need to provide
 a `config.ini` file in that directory. The [default
 configuration](https://github.com/MinchinWeb/docker-pypi/blob/master/root/config/config.ini)
-can be used as is (although you have to copy it in place). The [PyPICloud
+can be used as is (although you have to copy it in place). Note that some defaults have been changed from the upstream defaults. The [PyPICloud
 documentation](https://pypicloud.readthedocs.io/en/latest/topics/configuration.html)
 will be useful if you want to customize it. In particular, it has options to
 use cloud storage for Python packages you are hosting or to use a "full"
 database (rather than the default of SQLite) for caching your list of available
 packages.
 
-Personally, the only option I changed from the default was to add
+Personally, the biggest option I changed from the upstream default was to add
 `pypi.fallback = cache`, which will cause packages to be downloaded from the
 main PyPI and then cached the first time they are requested.
 
@@ -81,13 +81,16 @@ disk](https://pip.pypa.io/en/stable/user_guide/#configuration). To use your
 local server alone, add the following to your `pip.conf`:
 
     [global]
+    trusted-host = http://localhost
     index-url = http://localhost:6543/simple/
 
-**Note**: Adjust the URL to match the hostname of the machine you're running
+**Note**: on Windows, this files is actually called `pip.ini`.
+
+**Note 2**: Adjust the URL to match the hostname of the machine you're running
 Docker on, and the port to match what you set in the `docker-compose.yaml`
 above.
 
-**Note 2**: Using `index-url` (as above, in your `pip.conf`) is going to make
+**Note 3**: Using `index-url` (as above, in your `pip.conf`) is going to make
 your server the only place `pip` will look for packages, and thus if you're
 server is down, `pip` won't work. *pypicloud* is set to either (by default)
 forward to or (with the `pypi.fallback = cache` in `/config/config.ini`) cache
