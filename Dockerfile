@@ -73,7 +73,7 @@ ARG URL=""
 ARG BRANCH="none"
 
 LABEL maintainer="MinchinWeb" \
-      org.label-schema.description="Personal base image, based on Ubuntu" \
+      org.label-schema.description="PyPI local server for Python packages" \
       org.label-schema.build-date=${BUILD_DATE} \
       org.label-schema.vcs-url=${URL} \
       org.label-schema.vcs-ref=${COMMIT} \
