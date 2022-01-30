@@ -10,10 +10,9 @@ to publish Python packages (e.g. for internal projects).
 Under the hood, this is using
 [PyPICloud](https://pypicloud.readthedocs.io/en/latest/).
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/minchinweb/pypi.svg?style=popout)](https://hub.docker.com/r/minchinweb/pypi)
-[![Size & Layers](https://images.microbadger.com/badges/image/minchinweb/pypi.svg)](https://microbadger.com/images/minchinweb/pypi)
 [![GitHub issues](https://img.shields.io/github/issues-raw/minchinweb/docker-pypi.svg?style=popout)](https://github.com/MinchinWeb/docker-pypi/issues)
 <!--
+[![Docker Pulls](https://img.shields.io/docker/pulls/minchinweb/pypi.svg?style=popout)](https://hub.docker.com/r/minchinweb/pypi)
 ![MicroBadger Layers](https://img.shields.io/microbadger/layers/layers/minchinweb/pypi.svg?style=plastic)
 ![MicroBadger Size](https://img.shields.io/microbadger/image-size/image-size/minchinweb/pypi.svg?style=plastic)
 -->
@@ -29,7 +28,7 @@ The container is designed to be used directly. Here is a portion of my personal
       # many others...
 
       pypi:
-        image: minchinweb/pypi
+        image: ghcr.io/minchinweb/pypi:1
         restart: unless-stopped
         environment:
           - PUID=${PUID}

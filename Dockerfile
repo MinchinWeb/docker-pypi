@@ -1,4 +1,4 @@
-FROM minchinweb/python
+FROM ghcr.io/minchinweb/python:3.9
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PYPICLOUD_VERSION 1.2.0
