@@ -42,10 +42,10 @@ jobs:
           echo Build Date: $BUILD_DATE
           echo "BUILD_DATE=${BUILD_DATE}" >> $GITHUB_ENV
 
-          export PYPICLOUD_VERSION_X_Y_Z=$(cat Dockerfile | grep -oP '__version__\s+=\s+\"?\K[\d\w\.]+')
+          export PYPICLOUD_VERSION_X_Y_Z=$(cat Dockerfile | grep -oP 'PYPICLOUD_VERSION=\K\d+(.\d+(.\d+\w*)?)?')
           export PYPICLOUD_VERSION_X_Y=$(echo $PYPICLOUD_VERSION_X_Y_Z | cut -f 1-2 -d .)
           export PYPICLOUD_VERSION_X=$(echo $PYPICLOUD_VERSION_X_Y_Z | cut -f 1 -d .)
-          echo Python Versions: ${PYPICLOUD_VERSION_X} ${PYPICLOUD_VERSION_X_Y} ${PYPICLOUD_VERSION_X_Y_Z}
+          echo PyPi Cloud Versions: ${PYPICLOUD_VERSION_X} ${PYPICLOUD_VERSION_X_Y} ${PYPICLOUD_VERSION_X_Y_Z}
           echo "PYPICLOUD_VERSION_X_Y_Z=${PYPICLOUD_VERSION_X_Y_Z}" >> $GITHUB_ENV
           echo "PYPICLOUD_VERSION_X_Y=${PYPICLOUD_VERSION_X_Y}" >> $GITHUB_ENV
           echo "PYPICLOUD_VERSION_X=${PYPICLOUD_VERSION_X}" >> $GITHUB_ENV

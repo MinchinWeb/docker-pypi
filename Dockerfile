@@ -1,7 +1,7 @@
 FROM ghcr.io/minchinweb/python:3.9
 
 ARG DEBIAN_FRONTEND=noninteractive
-ENV PYPICLOUD_VERSION 1.2.0
+ENV PYPICLOUD_VERSION=1.2.0
 
 # Add an environment variable that pypicloud-uwsgi.sh uses to determine which
 # user to run as
